@@ -19,8 +19,19 @@ const MainContainer = styled.div`
   }
 `;
 
+// 헤더 영역 (다른 페이지와 일관성 유지)
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(16px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
+`;
 
-
+const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
 
 // 로딩 화면 스타일
 const LoadingContent = styled.div`
@@ -29,15 +40,15 @@ const LoadingContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: max(20px, calc(40px * var(--device-scale, 1))) max(12px, calc(24px * var(--device-scale, 1)));
+  padding: calc(40px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
   text-align: center;
   min-height: 0;
 `;
 
 const LoadingAnimation = styled.div`
-  width: max(60px, calc(120px * var(--device-scale, 1)));
-  height: max(60px, calc(120px * var(--device-scale, 1)));
-  margin-bottom: max(16px, calc(32px * var(--device-scale, 1)));
+  width: calc(120px * var(--device-scale, 1));
+  height: calc(120px * var(--device-scale, 1));
+  margin-bottom: calc(32px * var(--device-scale, 1));
   position: relative;
 `;
 
@@ -56,14 +67,14 @@ const LoadingSpinner = styled.div`
 `;
 
 const LoadingTitle = styled.h1`
-  font-size: max(16px, calc(24px * var(--device-scale, 1)));
+  font-size: calc(24px * var(--device-scale, 1));
   font-weight: 600;
   color: ${theme.colors.black};
-  margin-bottom: max(6px, calc(12px * var(--device-scale, 1)));
+  margin-bottom: calc(12px * var(--device-scale, 1));
 `;
 
 const LoadingSubtitle = styled.p`
-  font-size: max(11px, calc(16px * var(--device-scale, 1)));
+  font-size: calc(16px * var(--device-scale, 1));
   color: ${theme.colors.gray[600]};
   line-height: 1.5;
   margin: 0;
@@ -71,7 +82,7 @@ const LoadingSubtitle = styled.p`
 
 // 하단 프로그레스바
 const ProgressContainer = styled.div`
-  padding: max(12px, calc(20px * var(--device-scale, 1))) max(12px, calc(24px * var(--device-scale, 1)));
+  padding: calc(20px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
   background-color: ${theme.colors.white};
 `;
 
@@ -98,21 +109,21 @@ const CompletionContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: max(20px, calc(40px * var(--device-scale, 1))) max(12px, calc(24px * var(--device-scale, 1)));
+  padding: calc(40px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
   text-align: center;
   min-height: 0;
 `;
 
 const CompletionIcon = styled.div`
-  width: max(50px, calc(100px * var(--device-scale, 1)));
-  height: max(50px, calc(100px * var(--device-scale, 1)));
+  width: calc(100px * var(--device-scale, 1));
+  height: calc(100px * var(--device-scale, 1));
   background: linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.secondary} 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: max(24px, calc(48px * var(--device-scale, 1)));
-  margin-bottom: max(12px, calc(24px * var(--device-scale, 1)));
+  font-size: calc(48px * var(--device-scale, 1));
+  margin-bottom: calc(24px * var(--device-scale, 1));
   animation: bounceIn 0.8s ease-out;
   
   @keyframes bounceIn {
@@ -131,36 +142,36 @@ const CompletionIcon = styled.div`
 `;
 
 const CompletionTitle = styled.h1`
-  font-size: max(16px, calc(24px * var(--device-scale, 1)));
+  font-size: calc(24px * var(--device-scale, 1));
   font-weight: 600;
   color: ${theme.colors.black};
-  margin-bottom: max(6px, calc(12px * var(--device-scale, 1)));
+  margin-bottom: calc(12px * var(--device-scale, 1));
 `;
 
 const CompletionSubtitle = styled.p`
-  font-size: max(11px, calc(16px * var(--device-scale, 1)));
+  font-size: calc(16px * var(--device-scale, 1));
   color: ${theme.colors.gray[600]};
   line-height: 1.5;
-  margin-bottom: max(16px, calc(32px * var(--device-scale, 1)));
+  margin-bottom: calc(32px * var(--device-scale, 1));
 `;
 
 const CompletionActions = styled.div`
   width: 100%;
-  padding: 0 max(12px, calc(24px * var(--device-scale, 1))) max(12px, calc(24px * var(--device-scale, 1)));
+  padding: 0 calc(24px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
 `;
 
 const PrimaryButton = styled.button`
   width: 100%;
-  padding: max(8px, calc(16px * var(--device-scale, 1)));
+  padding: calc(16px * var(--device-scale, 1));
   background: linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.secondary} 100%);
   color: ${theme.colors.white};
   border: none;
-  border-radius: max(6px, calc(12px * var(--device-scale, 1)));
-  font-size: max(12px, calc(16px * var(--device-scale, 1)));
+  border-radius: calc(12px * var(--device-scale, 1));
+  font-size: calc(16px * var(--device-scale, 1));
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  margin-bottom: max(6px, calc(12px * var(--device-scale, 1)));
+  margin-bottom: calc(12px * var(--device-scale, 1));
   
   &:hover {
     transform: translateY(-2px);
@@ -379,6 +390,21 @@ export default function Confirm() {
       <DeviceFrame>
         {/* 상단 상태바 */}
         <StatusBar showIcons={true} />
+        
+        {/* 헤더 */}
+        <Header>
+          <Logo>
+            <img 
+              src="/images/logos/Black.svg" 
+              alt="AlgoCare"
+              style={{
+                width: 'calc(167px * var(--device-scale, 1))',
+                height: 'calc(36px * var(--device-scale, 1))',
+                flexShrink: 0
+              }}
+            />
+          </Logo>
+        </Header>
           
           {!isComplete ? (
           // 로딩 화면

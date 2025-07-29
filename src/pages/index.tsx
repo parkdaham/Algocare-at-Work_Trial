@@ -38,8 +38,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: max(8px, calc(16px * var(--device-scale, 1))) max(12px, calc(24px * var(--device-scale, 1)));
-  border-bottom: 1px solid ${theme.colors.gray[100]};
+  padding: calc(16px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
 `;
 
 const Logo = styled.div`
@@ -48,93 +47,82 @@ const Logo = styled.div`
   gap: 8px;
 `;
 
-const LogoIcon = styled.div`
-  width: max(16px, calc(32px * var(--device-scale, 1)));
-  height: max(16px, calc(32px * var(--device-scale, 1)));
-  background-color: ${theme.colors.black};
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${theme.colors.white};
-  font-weight: bold;
-  font-size: max(12px, calc(18px * var(--device-scale, 1)));
-`;
-
-const LogoText = styled.span`
-  font-size: max(14px, calc(20px * var(--device-scale, 1)));
-  font-weight: 600;
-  color: ${theme.colors.black};
-`;
 
 
 
 // 메인 콘텐츠
 const Content = styled.div`
   flex: 1;
-  padding: max(12px, calc(24px * var(--device-scale, 1))) max(16px, calc(32px * var(--device-scale, 1)));
+  padding: calc(24px * var(--device-scale, 1)) calc(32px * var(--device-scale, 1));
   display: flex;
   flex-direction: column;
-  min-height: 0; /* flex 오버플로우 방지 */
+  gap: 1rem;
+  overflow: hidden;
+  min-height: 0;
 `;
 
 const MainTitle = styled.h1`
-  font-size: max(14px, calc(20px * var(--device-scale, 1)));
-  font-weight: 700;
+  font-size: calc(32px * var(--device-scale, 1));
+  font-weight: 600;
   color: ${theme.colors.black};
   line-height: 1.4;
-  margin-bottom: max(6px, calc(12px * var(--device-scale, 1)));
+  text-align: left;
 `;
 
 
-const Subtitle = styled.p`
-  font-size: max(10px, calc(13px * var(--device-scale, 1)));
-  color: ${theme.colors.gray[600]};
-  line-height: 1.5;
-  margin-bottom: max(24px, calc(48px * var(--device-scale, 1)));
-`;
+
 
 
 // 전화번호 입력창
 const PhoneDisplay = styled.div`
-  text-align: center;
-  font-size: max(20px, calc(32px * var(--device-scale, 1)));
-  font-weight: 400;
-  letter-spacing: max(1px, calc(2px * var(--device-scale, 1)));
-  color: ${theme.colors.black};
-  margin-bottom: max(32px, calc(64px * var(--device-scale, 1)));
-  padding: max(12px, calc(24px * var(--device-scale, 1))) 0;
-  min-height: max(32px, calc(48px * var(--device-scale, 1)));
   display: flex;
+  padding: calc(16px * var(--device-scale, 1)) calc(36px * var(--device-scale, 1));
   align-items: center;
   justify-content: center;
+  border-radius: calc(12px * var(--device-scale, 1));
+  background: #F4F4F4;
+  margin: 1 auto;
+  min-height: calc(48px * var(--device-scale, 1));
+  width: fit-content;
+  min-width: calc(280px * var(--device-scale, 1));
+  max-width: calc(350px * var(--device-scale, 1));
+  
+  color: #828282;
+  text-align: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: calc(28px * var(--device-scale, 1));
+  font-style: normal;
+  font-weight: 600;
+  line-height: calc(24px * var(--device-scale, 1));
+  letter-spacing: calc(2px * var(--device-scale, 1));
 `;
 
 // 숫자 키패드
 const Keypad = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: max(16px, calc(32px * var(--device-scale, 1)));
-  margin-bottom: max(24px, calc(48px * var(--device-scale, 1)));
-  padding: 0 max(24px, calc(48px * var(--device-scale, 1)));
-  flex: 1;
-  align-content: center;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(24px * var(--device-scale, 1));
+  padding: 0 calc(24px * var(--device-scale, 1));
+  width: 100%;
+  flex-shrink: 0;
 `;
 
 const KeypadButton = styled.button<{ isSpecial?: boolean }>`
-  width: max(50px, calc(90px * var(--device-scale, 1)));
-  height: max(50px, calc(90px * var(--device-scale, 1)));
+  display: flex;
+  width: calc(100px * var(--device-scale, 1));
+  height: calc(100px * var(--device-scale, 1));
+  padding: calc(25px * var(--device-scale, 1)) 0;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
   border: none;
   border-radius: 50%;
   background-color: ${props => props.isSpecial ? 'transparent' : 'transparent'};
-  font-size: max(24px, calc(40px * var(--device-scale, 1)));
-  font-weight: 300;
+  font-size: calc(40px * var(--device-scale, 1));
+  font-weight: 500;
   color: ${theme.colors.black};
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.15s ease;
   justify-self: center;
   
@@ -348,21 +336,39 @@ export default function Home() {
   const typingEffect = useSequentialTyping(allTextItems, 25);
   
   const formatPhoneDisplay = (number: string) => {
+    const inputStyle = { color: '#525252' };
+    const placeholderStyle = { color: '#C6C6C6' };
+    
     if (number.length <= 3) {
-      return number + '-****-****';
+      return (
+        <>
+          <span style={inputStyle}>{number}</span>
+          <span style={placeholderStyle}>-****-****</span>
+        </>
+      );
     }
     if (number.length <= 7) {
       const part1 = number.slice(0, 3);
       const part2 = number.slice(3);
-      return `${part1}-${part2}${'*'.repeat(4 - part2.length)}-****`;
+      return (
+        <>
+          <span style={inputStyle}>{part1}-{part2}</span>
+          <span style={placeholderStyle}>{'*'.repeat(4 - part2.length)}-****</span>
+        </>
+      );
     }
     if (number.length <= 11) {
       const part1 = number.slice(0, 3);
       const part2 = number.slice(3, 7);
       const part3 = number.slice(7);
-      return `${part1}-${part2}-${part3}${'*'.repeat(4 - part3.length)}`;
+      return (
+        <>
+          <span style={inputStyle}>{part1}-{part2}-{part3}</span>
+          <span style={placeholderStyle}>{'*'.repeat(4 - part3.length)}</span>
+        </>
+      );
     }
-    return number;
+    return <span style={inputStyle}>{number}</span>;
   };
   
   const handleKeypadPress = (value: string) => {
@@ -402,49 +408,69 @@ export default function Home() {
         {/* 헤더 */}
         <Header>
           <Logo>
-            <LogoIcon>C</LogoIcon>
-            <LogoText>algocare</LogoText>
+            <img 
+              src="/images/logos/Black.svg" 
+              alt="AlgoCare"
+              style={{
+                width: 'calc(167px * var(--device-scale, 1))',
+                height: 'calc(36px * var(--device-scale, 1))',
+                flexShrink: 0
+              }}
+            />
           </Logo>
         </Header>
         
         {/* 메인 콘텐츠 */}
         <Content>
+          {/* 상단 헤더 영역 - 좌측 정렬 */}
           <MainTitle>
             알고케어 아연미네랄8에는<br />
             유럽산 <strong>LALLEMAND</strong> 미네랄을 사용해요
           </MainTitle>
           
-          <Subtitle>
-            100년 전통의 효모 전문 글로벌 기업인 Lallemand의 크롬과 몰리브덴을 담았어요.
-          </Subtitle>
-          
-          
-          <div style={{ textAlign: 'center', marginBottom: 'clamp(16px, 4vw, 24px)' }}>
-            <div style={{ 
-              fontSize: 'clamp(12px, 2.5vw, 14px)', 
-              color: theme.colors.gray[600], 
-              marginBottom: 'clamp(8px, 2vw, 12px)' 
-            }}>
-              전화번호 찾기
+          {/* 입력 프레임 영역 - 중앙 정렬 */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.75rem',
+            flex: 1
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ 
+                fontSize: 'clamp(8px, 1.5vw, 12px)', 
+                color: theme.colors.gray[600]
+              }}>
+                전화번호로 시작
+              </div>
             </div>
-          </div>
-          
-          <PhoneDisplay>
-            {formatPhoneDisplay(phoneNumber)}
-          </PhoneDisplay>
-          
-          <Keypad>
-            {keypadNumbers.flat().map((num, index) => (
-              <KeypadButton
-                key={index}
-                isSpecial={num === '' || num === 'delete'}
-                onClick={() => num && handleKeypadPress(num)}
-                disabled={num === ''}
-              >
-                {num === 'delete' ? '⌫' : num}
-              </KeypadButton>
+            
+            <PhoneDisplay>
+              {formatPhoneDisplay(phoneNumber)}
+            </PhoneDisplay>
+            
+            <Keypad>
+            {keypadNumbers.map((row, rowIndex) => (
+              <div key={rowIndex} style={{ 
+                display: 'flex', 
+                gap: 'calc(48px * var(--device-scale, 1))',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                {row.map((num, colIndex) => (
+                  <KeypadButton
+                    key={`${rowIndex}-${colIndex}`}
+                    isSpecial={num === '' || num === 'delete'}
+                    onClick={() => num && handleKeypadPress(num)}
+                    disabled={num === ''}
+                  >
+                    {num === 'delete' ? '⌫' : num}
+                  </KeypadButton>
+                ))}
+              </div>
             ))}
           </Keypad>
+          </div>
           
         </Content>
         </DeviceFrame>

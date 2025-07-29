@@ -7,10 +7,10 @@ const StatusBarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   /* DeviceFrame 크기에 비례하여 스케일링 */
-  height: max(24px, calc(48px * var(--device-scale, 1)));
-  padding: 0 max(12px, calc(20px * var(--device-scale, 1)));
-  background-color: ${theme.colors.white};
-  font-size: max(12px, calc(16px * var(--device-scale, 1)));
+  height: calc(48px * var(--device-scale, 1));
+  padding: 0 calc(20px * var(--device-scale, 1));
+  background-color: #F9F9F9;
+  font-size: calc(16px * var(--device-scale, 1));
   font-weight: 600;
   color: ${theme.colors.black};
 `;
@@ -22,9 +22,9 @@ const StatusTime = styled.div`
 
 const StatusIcons = styled.div`
   display: flex;
-  gap: max(3px, calc(6px * var(--device-scale, 1)));
+  gap: calc(6px * var(--device-scale, 1));
   align-items: center;
-  font-size: max(14px, calc(18px * var(--device-scale, 1)));
+  font-size: calc(18px * var(--device-scale, 1));
 `;
 
 interface StatusBarProps {

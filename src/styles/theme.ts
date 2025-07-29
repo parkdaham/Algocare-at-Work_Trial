@@ -21,6 +21,9 @@ export const theme = {
     warning: '#F59E0B',
     error: '#EF4444',
   },
+  fontFamily: {
+    primary: "'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif",
+  },
   fontSizes: {
     xs: '0.75rem',    // 12px
     sm: '0.875rem',   // 14px

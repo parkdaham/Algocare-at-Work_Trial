@@ -77,7 +77,7 @@ const useSequentialTyping = (items: string[], speed: number = 30) => {
 const MainContainer = styled.div`
   display: flex;
   min-height: 100vh;
-  background-color: ${theme.colors.gray[50]};
+  background-color: #F9F9F9;
   padding: ${theme.spacing.xl};
   gap: ${theme.spacing.xl};
   
@@ -105,24 +105,26 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid ${theme.colors.gray[100]};
+  padding: calc(20px * var(--device-scale, 1)) calc(20px * var(--device-scale, 1)) calc(8px * var(--device-scale, 1)) calc(20px * var(--device-scale, 1));
 `;
 
 const HeaderTitle = styled.h1`
-  font-size: 16px;
+  color: #010101;
+  font-family: Pretendard;
+  font-size: calc(24px * var(--device-scale, 1));
+  font-style: normal;
   font-weight: 600;
-  color: ${theme.colors.black};
+  line-height: calc(28px * var(--device-scale, 1));
   margin: 0;
 `;
 
 const CloseButton = styled.button`
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: calc(20px * var(--device-scale, 1));
   color: ${theme.colors.gray[600]};
   cursor: pointer;
-  padding: 4px;
+  padding: calc(4px * var(--device-scale, 1));
   
   &:hover {
     color: ${theme.colors.black};
@@ -139,117 +141,166 @@ const Content = styled.div`
 const HeaderContainer = styled.div`
   position: sticky;
   top: 0;
-  background-color: ${theme.colors.white};
+  background-color: #F9F9F9;
   z-index: 50;
-  border-bottom: 1px solid ${theme.colors.gray[100]};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  //box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 `;
 
 const ScrollableContent = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 80px; // 하단 버튼 영역 공간 확보
+  padding: 0px 8px 80px 8px; // 하단 버튼 영역 공간 확보
+  
+  /* 스크롤바 숨기기 - webkit 브라우저 */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* 스크롤바 숨기기 - Firefox */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 `;
 
 // 탭 메뉴
 const TabContainer = styled.div`
   display: flex;
-  background-color: ${theme.colors.gray[100]};
-  border-radius: 8px;
-  margin: 16px 24px;
-  padding: 4px;
+  background-color: #FEFEFE;
+  border-radius: calc(8px * var(--device-scale, 1));
+  margin: calc(16px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1)) calc(8px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
+  padding: calc(4px * var(--device-scale, 1));
   position: relative;
   z-index: 15;
 `;
 
 const TabButton = styled.button<{ isActive: boolean }>`
   flex: 1;
-  padding: 8px 12px;
+  padding: calc(10px * var(--device-scale, 1)) calc(4px * var(--device-scale, 1));
   border: none;
-  background-color: ${props => props.isActive ? theme.colors.white : 'transparent'};
-  color: ${props => props.isActive ? theme.colors.black : theme.colors.gray[600]};
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  background-color: ${props => props.isActive ? '#21242C' : 'transparent'};
+  color: ${props => props.isActive ? '#FEFEFE' : '#828282'};
+  border-radius: calc(10px * var(--device-scale, 1));
+  text-align: center;
+  font-family: Pretendard;
+  font-size: calc(18px * var(--device-scale, 1));
+  font-style: normal;
+  font-weight: 600;
+  line-height: calc(24px * var(--device-scale, 1));
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: ${props => props.isActive ? '0ms' : '50ms'};
   position: relative;
   z-index: 20;
   pointer-events: auto;
+  transform: scale(${props => props.isActive ? 1 : 0.98});
   
   &:hover {
-    background-color: ${props => props.isActive ? theme.colors.white : theme.colors.gray[200]};
+    background-color: ${props => props.isActive ? '#21242C' : theme.colors.gray[200]};
+    transform: scale(1);
+    transition-delay: 0ms;
   }
 `;
 
 const SectionContainer = styled.div`
-  padding: 8px 24px 20px 24px;
+  padding: calc(24px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1)) calc(80px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
   flex: 1;
   overflow-y: auto;
+  
+  /* 스크롤바 숨기기 - webkit 브라우저 */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* 스크롤바 숨기기 - Firefox */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 16px;
+  color: #000;
+  font-family: Pretendard;
+  font-size: calc(22px * var(--device-scale, 1));
+  font-style: normal;
   font-weight: 600;
-  color: ${theme.colors.black};
-  margin-bottom: 16px;
+  line-height: calc(24px * var(--device-scale, 1));
+  margin-bottom: calc(20px * var(--device-scale, 1));
 `;
 
 const CardsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: calc(12px * var(--device-scale, 1));
+  margin-bottom: calc(40px * var(--device-scale, 1));
 `;
 
 const CompactCard = styled.div<{ isSelected: boolean }>`
   position: relative;
-  aspect-ratio: 1;
-  background-color: ${props => props.isSelected ? theme.colors.primary : theme.colors.gray[50]};
-  border: 2px solid ${props => props.isSelected ? theme.colors.primary : theme.colors.gray[200]};
-  border-radius: 12px;
   display: flex;
+  width: calc(116px * var(--device-scale, 1));
+  height: calc(134px * var(--device-scale, 1));
+  padding: calc(14px * var(--device-scale, 1)) calc(15px * var(--device-scale, 1)) calc(12px * var(--device-scale, 1)) calc(15px * var(--device-scale, 1));
   flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
+  gap: calc(4px * var(--device-scale, 1));
+  background-color: ${theme.colors.white};
+  border: none;
+  border-radius: calc(12px * var(--device-scale, 1));
+  box-shadow: ${props => props.isSelected ? 
+    `inset 0 0 0 calc(3.4px * var(--device-scale, 1)) #EF3340` : 
+    'none'
+  };
   cursor: pointer;
   transition: all 0.2s;
   
   &:hover {
-    border-color: ${theme.colors.primary};
-    background-color: ${props => props.isSelected ? theme.colors.primary : theme.colors.gray[100]};
+    background-color: ${theme.colors.gray[100]};
   }
 `;
 
-const CardIcon = styled.div<{ isSelected: boolean }>`
-  font-size: 20px;
-  margin-bottom: 4px;
-  filter: ${props => props.isSelected ? 'brightness(0) invert(1)' : 'none'};
+const CardIcon = styled.img<{ isSelected: boolean }>`
+  width: calc(80px * var(--device-scale, 1));
+  height: calc(80px * var(--device-scale, 1));
+  object-fit: contain;
+  object-position: center;
+  filter: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 `;
 
 const CardLabel = styled.span<{ isSelected: boolean }>`
-  font-size: 11px;
-  font-weight: 500;
-  color: ${props => props.isSelected ? theme.colors.white : theme.colors.gray[700]};
+  font-size: calc(18px * var(--device-scale, 1));
+  font-weight: 600;
+  color: ${theme.colors.gray[700]};
   text-align: center;
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  user-select: none;
+  pointer-events: none;
 `;
 
 const Badge = styled.div`
   position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 18px;
-  height: 18px;
-  background-color: ${theme.colors.primary};
+  top: calc(-6px * var(--device-scale, 1));
+  right: calc(-6px * var(--device-scale, 1));
+  display: flex;
+  width: calc(36px * var(--device-scale, 1));
+  height: calc(36px * var(--device-scale, 1));
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  background-color: #EF3340;
   color: ${theme.colors.white};
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: calc(18px * var(--device-scale, 1));
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 calc(2px * var(--device-scale, 1)) calc(4px * var(--device-scale, 1)) rgba(0, 0, 0, 0.1);
+  user-select: none;
+  pointer-events: none;
 `;
 
 const BottomSection = styled.div`
@@ -257,34 +308,43 @@ const BottomSection = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 16px 24px;
-  border-top: 1px solid ${theme.colors.gray[100]};
+  padding: calc(24px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1)) calc(32px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1));
+  border-top: calc(1px * var(--device-scale, 1)) solid ${theme.colors.gray[100]};
   background-color: ${theme.colors.white};
+  border-radius: calc(24px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1)) 0 0;
+  box-shadow: 0 calc(-4px * var(--device-scale, 1)) calc(12px * var(--device-scale, 1)) rgba(0, 0, 0, 0.04);
   z-index: 5;
 `;
 
 const BottomText = styled.p`
-  font-size: 12px;
+  font-size: calc(20px * var(--device-scale, 1));
+  font-weight: 500;
   color: ${theme.colors.gray[600]};
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: calc(22px * var(--device-scale, 1));
   line-height: 1.4;
 `;
 
 const CTAButton = styled.button<{ disabled: boolean }>`
-  background-color: ${props => props.disabled ? theme.colors.gray[300] : theme.colors.primary};
+  display: flex;
+  width: calc(536px * var(--device-scale, 1));
+  height: calc(80px * var(--device-scale, 1));
+  padding: calc(23px * var(--device-scale, 1)) calc(179px * var(--device-scale, 1));
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: calc(16px * var(--device-scale, 1));
+  background: ${props => props.disabled ? '#E0E0E0' : '#000000'};
   color: ${theme.colors.white};
   border: none;
-  border-radius: 12px;
-  padding: 16px;
-  font-size: 16px;
+  font-size: calc(24px * var(--device-scale, 1));
   font-weight: 600;
+  white-space: nowrap;
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   transition: all 0.2s;
-  opacity: ${props => props.disabled ? 0.6 : 1};
   
   &:hover:not(:disabled) {
-    background-color: ${theme.colors.gray[700]};
+    background: #333333;
   }
   
   &:active:not(:disabled) {
@@ -380,8 +440,7 @@ const BottomSheetContainer = styled.div<{ isOpen: boolean }>`
   left: 0;
   right: 0;
   background-color: ${theme.colors.white};
-  border-radius: 24px 24px 16px 16px;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: calc(24px * var(--device-scale, 1)) calc(24px * var(--device-scale, 1)) calc(16px * var(--device-scale, 1)) calc(16px * var(--device-scale, 1));
   z-index: 101;
   transform: translateY(${props => props.isOpen ? '0' : '100%'});
   transition: transform 0.3s ease-in-out;
@@ -390,57 +449,57 @@ const BottomSheetContainer = styled.div<{ isOpen: boolean }>`
 `;
 
 const BottomSheetHandle = styled.div`
-  width: 40px;
-  height: 4px;
+  width: calc(40px * var(--device-scale, 1));
+  height: calc(4px * var(--device-scale, 1));
   background-color: ${theme.colors.gray[300]};
-  border-radius: 2px;
-  margin: 12px auto 20px;
+  border-radius: calc(2px * var(--device-scale, 1));
+  margin: calc(12px * var(--device-scale, 1)) auto calc(20px * var(--device-scale, 1));
   cursor: pointer;
 `;
 
 const BottomSheetHeader = styled.div`
   text-align: center;
-  padding: 0 24px 20px;
-  border-bottom: 1px solid ${theme.colors.gray[100]};
+  padding: 0 calc(24px * var(--device-scale, 1)) calc(20px * var(--device-scale, 1));
+  border-bottom: calc(1px * var(--device-scale, 1)) solid ${theme.colors.gray[100]};
 `;
 
 const BottomSheetTitle = styled.h2`
-  font-size: 20px;
+  font-size: calc(24px * var(--device-scale, 1));
   font-weight: 600;
   color: ${theme.colors.black};
-  margin-bottom: 8px;
+  margin-bottom: calc(8px * var(--device-scale, 1));
 `;
 
 const BottomSheetSubtitle = styled.p`
-  font-size: 14px;
+  font-size: calc(16px * var(--device-scale, 1));
   color: ${theme.colors.gray[600]};
   margin: 0;
 `;
 
 const BottomSheetContent = styled.div`
-  padding: 24px;
+  padding: calc(24px * var(--device-scale, 1));
 `;
 
 const ResultSection = styled.div`
   text-align: center;
-  padding: 20px 0;
+  padding: calc(20px * var(--device-scale, 1)) 0;
 `;
 
 const ResultText = styled.p`
-  font-size: 14px;
+  font-size: calc(16px * var(--device-scale, 1));
   color: ${theme.colors.gray[600]};
   line-height: 1.5;
-  margin-bottom: 24px;
+  margin-bottom: calc(24px * var(--device-scale, 1));
 `;
 
 const BottomSheetButton = styled.button`
   width: 100%;
-  padding: 16px;
+  padding: calc(16px * var(--device-scale, 1));
   background-color: ${theme.colors.primary};
   color: ${theme.colors.white};
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: calc(12px * var(--device-scale, 1));
+  font-size: calc(18px * var(--device-scale, 1));
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -457,7 +516,7 @@ const BottomSheetButton = styled.button`
 export default function ConditionPage() {
   
   // 탭 메뉴
-  const tabs = ['커스텀', '심장', '중성', '기본', '여성'];
+  const tabs = ['커스텀', '기분', '상황', '증상', '여성'];
   
   // 각 카드의 선택 상태 관리
   const [cardSelections, setCardSelections] = useState<Record<string, number>>({});
@@ -484,38 +543,60 @@ export default function ConditionPage() {
     }
   };
 
-  // 스크롤 위치에 따른 활성 탭 감지
+  // 스크롤 위치 기반 탭 활성화
   useEffect(() => {
+    const contentElement = document.querySelector('[data-content-container]');
+    const headerElement = document.querySelector('[data-header-container]');
+    if (!contentElement || !headerElement) return;
+
     const handleScroll = () => {
-      const contentElement = document.querySelector('[data-content-container]');
-      const headerElement = document.querySelector('[data-header-container]');
-      if (!contentElement || !headerElement) return;
-
-      const sections = tabs.map(tab => ({
-        name: tab,
-        element: document.getElementById(`section-${tab}`)
-      })).filter(section => section.element);
-
       const headerHeight = headerElement.getBoundingClientRect().height;
-      const scrollPosition = contentElement.scrollTop + headerHeight + 50; // 헤더 높이 + 여백
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section.element) {
-          const offsetTop = section.element.offsetTop;
-          if (offsetTop <= scrollPosition) {
-            setActiveTab(section.name);
+      const scrollTop = contentElement.scrollTop;
+      const scrollHeight = contentElement.scrollHeight;
+      const clientHeight = contentElement.clientHeight;
+      
+      // 1. 최상단 예외처리 (상위 5% 이내)
+      if (scrollTop < clientHeight * 0.05) {
+        setActiveTab(tabs[0]);
+        return;
+      }
+      
+      // 2. 최하단 예외처리 (하위 10% 이내)
+      if (scrollTop + clientHeight > scrollHeight - clientHeight * 0.1) {
+        setActiveTab(tabs[tabs.length - 1]);
+        return;
+      }
+      
+      // 3. 일반 섹션 비율 기반 활성화
+      for (let i = 0; i < tabs.length; i++) {
+        const currentSection = document.getElementById(`section-${tabs[i]}`);
+        const nextSection = i < tabs.length - 1 ? document.getElementById(`section-${tabs[i + 1]}`) : null;
+        
+        if (currentSection) {
+          // 섹션이 뷰포트 상단 20% 지점에 도달하면 활성화
+          const activationPoint = currentSection.offsetTop - headerHeight - (clientHeight * 0.2);
+          const nextActivationPoint = nextSection 
+            ? nextSection.offsetTop - headerHeight - (clientHeight * 0.2)
+            : Infinity;
+          
+          // 현재 스크롤 위치가 현재 섹션의 활성화 지점과 다음 섹션의 활성화 지점 사이에 있으면 활성화
+          if (scrollTop >= Math.max(0, activationPoint) && scrollTop < nextActivationPoint) {
+            setActiveTab(tabs[i]);
             break;
           }
         }
       }
     };
 
-    const contentElement = document.querySelector('[data-content-container]');
-    if (contentElement) {
-      contentElement.addEventListener('scroll', handleScroll);
-      return () => contentElement.removeEventListener('scroll', handleScroll);
-    }
+    // 초기 실행
+    handleScroll();
+    
+    // 스크롤 이벤트 리스너 등록
+    contentElement.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      contentElement.removeEventListener('scroll', handleScroll);
+    };
   }, [tabs]);
 
   // 바텀시트 닫기
@@ -531,70 +612,55 @@ export default function ConditionPage() {
   // 컨디션 카드 데이터 (탭별로 분류)
   const conditionsByTab = {
     '커스텀': [
-      { id: 'custom1', title: '개인맞춤', icon: '⚙️' },
-      { id: 'custom2', title: '프리미엄', icon: '⭐' },
-      { id: 'custom3', title: '전문가', icon: '👨‍⚕️' },
-      { id: 'custom4', title: '특별케어', icon: '💎' }
+      { id: 'custom1', title: '숙취 헬퍼', icon: 'custom pack/soju.svg' },
+      { id: 'custom2', title: '졸린 하루', icon: 'custom pack/sleep.svg' },
+      { id: 'custom3', title: '헬스 보충', icon: 'custom pack/health supplement.svg' },
+      { id: 'custom4', title: '피부 촉촉', icon: 'custom pack/skin moisture.svg' }
     ],
-    '심장': [
-      { id: 'energy', title: '운동', icon: '🏃' },
-      { id: 'immunity', title: '음주', icon: '🍷' },
-      { id: 'stress', title: '야근', icon: '💻' },
-      { id: 'sleep', title: '스트레스', icon: '😓' },
-      { id: 'digestion', title: '식사거를', icon: '🍽️' },
-      { id: 'beauty', title: '피로', icon: '😴' },
-      { id: 'muscle', title: '수면부족', icon: '🌙' },
-      { id: 'bone', title: '숙식킥', icon: '🥤' },
-      { id: 'eye1', title: '눈피로', icon: '👁️' },
-      { id: 'eye2', title: '눈건조', icon: '👁️' },
-      { id: 'joint', title: '근육경직', icon: '💪' },
-      { id: 'circulation', title: '근육통', icon: '💊' }
+    '상황': [
+      { id: 'before-drinking', title: '음주 예정', icon: 'before-drinking.svg' },
+      { id: 'after-drinking', title: '음주 후', icon: 'after-drinking.svg' },
+      { id: 'before-exercise', title: '운동 예정', icon: 'before-exercise.svg' },
+      { id: 'after-exercise', title: '운동 후', icon: 'after-exercise.svg' },
+      { id: 'working-overtime', title: '야근', icon: 'working-overtime.svg' },
+      { id: 'lack-of-sleep', title: '수면부족', icon: 'lack-of-sleep.svg' },
+      { id: 'monday-blues', title: '월요병', icon: 'mondayblues.svg' },
+      { id: 'stress', title: '스트레스', icon: 'stress.svg' }
     ],
-    '중성': [
-      { id: 'fatigue', title: '피로', icon: '😴' },
-      { id: 'aging', title: '어르클', icon: '👴' },
-      { id: 'brain', title: '두뇌', icon: '🧠' },
-      { id: 'mood', title: '컨디션', icon: '😊' },
-      { id: 'circulation2', title: '충혈감기', icon: '💧' },
-      { id: 'metabolism', title: '혈감기', icon: '💧' },
-      { id: 'coldness', title: '코감기', icon: '🤧' },
-      { id: 'immunity2', title: '아토피', icon: '🤒' },
-      { id: 'veggie', title: '소화불량', icon: '🥬' },
-      { id: 'supplement', title: '속식킥', icon: '🥤' },
-      { id: 'recovery', title: '수족냉증', icon: '❄️' },
-      { id: 'sleep2', title: '술파지벤', icon: '💊' },
-      { id: 'joint2', title: '근육경직', icon: '💪' },
-      { id: 'circulation3', title: '근육통', icon: '💊' },
-      { id: 'eye3', title: '눈건조', icon: '👁️' },
-      { id: 'eye4', title: '눈피로', icon: '👁️' },
-      { id: 'hair', title: '번아웃', icon: '🌰' },
-      { id: 'bone2', title: '무기력', icon: '🦴' },
-      { id: 'joint3', title: '불면증', icon: '🌙' },
-      { id: 'sleep3', title: '졸림', icon: '😴' },
-      { id: 'skin', title: '섹사', icon: '🥛' },
-      { id: 'hair2', title: '발바', icon: '🍌' },
-      { id: 'omega', title: '악래르기버', icon: '🐟' },
-      { id: 'vitaminC', title: '과인성당과', icon: '🍊' }
+    '증상': [
+      { id: 'fatigue', title: '피로', icon: 'fatigue.svg' },
+      { id: 'lethargy', title: '무기력', icon: 'lethargy.svg' },
+      { id: 'burnout', title: '번아웃', icon: 'burn-out.svg' },
+      { id: 'drowsiness', title: '졸림', icon: 'drowsiness.svg' },
+      { id: 'eye-strain', title: '눈피로', icon: 'eye-strain.svg' },
+      { id: 'headache', title: '두통', icon: 'headache.svg' },
+      { id: 'migraine', title: '편두통', icon: 'migraine.svg' },
+      { id: 'insomnia', title: '불면증', icon: 'insomnia.svg' },
+      { id: 'indigestion', title: '소화불량', icon: 'indigestion.svg' },
+      { id: 'heartburn', title: '속쓰림', icon: 'heartburn.svg' },
+      { id: 'constipation', title: '변비', icon: 'constipation.svg' },
+      { id: 'muscle-cramps', title: '근육경련', icon: 'muscle-cramps.svg' },
+      { id: 'muscle-pain', title: '근육통', icon: 'muscle-pain.svg' },
+      { id: 'cold-hands-feet', title: '수족냉증', icon: 'cold-hands-and-feet.svg' },
+      { id: 'acne', title: '여드름', icon: 'acne.svg' },
+      { id: 'common-cold', title: '감기', icon: 'common-cold.svg' },
+      { id: 'runny-nose', title: '콧물', icon: 'runny-nose.svg' },
+      { id: 'sore-throat', title: '목아픔', icon: 'sore-throat.svg' },
+      { id: 'allergic-rhinitis', title: '비염', icon: 'allergic-rhinitis.svg' },
+      { id: 'atopic-dermatitis', title: '아토피', icon: 'atopic-dermatitis.svg' }
     ],
-    '기본': [
-      { id: 'basic1', title: '비타민', icon: '💊' },
-      { id: 'basic2', title: '미네랄', icon: '⚡' },
-      { id: 'basic3', title: '오메가3', icon: '🐟' },
-      { id: 'basic4', title: '프로바이오틱스', icon: '🦠' },
-      { id: 'basic5', title: '칼슘', icon: '🦴' },
-      { id: 'basic6', title: '철분', icon: '🩸' },
-      { id: 'basic7', title: '아연', icon: '⚡' },
-      { id: 'basic8', title: '마그네슘', icon: '💪' }
+    '기분': [
+      { id: 'depression', title: '우울', icon: 'depressed.svg' },
+      { id: 'sadness', title: '슬픔', icon: 'sadness.svg' },
+      { id: 'anxiety', title: '불안', icon: 'anxiety.svg' },
+      { id: 'tension', title: '긴장', icon: 'tensity.svg' },
+      { id: 'sensitive', title: '예민', icon: 'sensitive.svg' },
+      { id: 'irritation', title: '짜증', icon: 'irritation.svg' }
     ],
     '여성': [
-      { id: 'women1', title: '엽산', icon: '🌸' },
-      { id: 'women2', title: '철분', icon: '🩸' },
-      { id: 'women3', title: '칼슘', icon: '🦴' },
-      { id: 'women4', title: '콜라겐', icon: '✨' },
-      { id: 'women5', title: '히알루론산', icon: '💧' },
-      { id: 'women6', title: '이소플라본', icon: '🌱' },
-      { id: 'women7', title: '크랜베리', icon: '🫐' },
-      { id: 'women8', title: '유산균', icon: '🦠' }
+      { id: 'menstrual-period', title: '생리중', icon: 'menstrual-period.svg' },
+      { id: 'pms', title: 'PMS증후군', icon: 'PMS.svg' },
+      { id: 'menstrual-pain', title: '생리통', icon: 'menstrual-pain.svg' }
     ]
   };
 
@@ -610,16 +676,16 @@ export default function ConditionPage() {
           '개인 맞춤형 영양 조합 설정'
         ]
       },
-      {
-        title: '탭 메뉴',
-        items: [
-          '커스텀: 개인 맞춤 설정',
-          '심장: 심혈관 건강 관련',
-          '중성: 일반적인 건강 관리',
-          '기본: 필수 영양소',
-          '여성: 여성 전용 케어'
-        ]
-      },
+              {
+          title: '탭 메뉴',
+          items: [
+            '커스텀: 개인 맞춤 설정',
+            '기분: 감정 상태별 케어',
+            '상황: 생활 상황별 케어',
+            '증상: 몸의 증상별 관리',
+            '여성: 여성 전용 케어'
+          ]
+        },
       {
         title: '사용 방법',
         items: [
@@ -702,18 +768,19 @@ export default function ConditionPage() {
     <MainContainer>
       <CenterContent>
         <DeviceFrame>
+          {/* 상단 상태바 */}
+          <StatusBar />
+          
           {/* 메인 콘텐츠 */}
           <Content>
-            {/* 상단 고정 영역 - 상태바, 헤더, 탭 모두 포함 */}
+            {/* 상단 고정 영역 - 헤더, 탭 포함 */}
             <HeaderContainer data-header-container>
-              {/* 상단 상태바 */}
-              <StatusBar />
               
               {/* 헤더 */}
               <Header>
-                <HeaderTitle>이대로 프로님의 몸상태를 선택해 주세요.</HeaderTitle>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span style={{ fontSize: '14px', color: theme.colors.gray[600] }}>
+                <HeaderTitle>김알고님의<br /> 몸상태를 선택해 주세요</HeaderTitle>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(20px * var(--device-scale, 1))' }}>
+                  <span style={{ fontSize: 'calc(20px * var(--device-scale, 1))', color: theme.colors.gray[600] }}>
                     {selectedCount}/10
                   </span>
                   <CloseButton onClick={() => window.location.href = '/'}>✕</CloseButton>
@@ -751,15 +818,18 @@ export default function ConditionPage() {
                 <div key={tabName} id={`section-${tabName}`}>
                   <SectionTitle>{tabName}</SectionTitle>
                   <CardsGrid>
-                    {(conditionsByTab[tabName as '커스텀' | '심장' | '중성' | '기본' | '여성'] || []).map((card) => (
+                    {(conditionsByTab[tabName as '커스텀' | '기분' | '상황' | '증상' | '여성'] || []).map((card) => (
                       <CompactCard
                         key={card.id}
                         isSelected={cardSelections[card.id] > 0}
                         onClick={() => handleCardClick(card.id)}
                       >
-                        <CardIcon isSelected={cardSelections[card.id] > 0}>
-                          {card.icon}
-                        </CardIcon>
+                        <CardIcon 
+                          isSelected={cardSelections[card.id] > 0}
+                          src={`/images/icons/${card.icon}`}
+                          alt={card.title}
+                          draggable={false}
+                        />
                         <CardLabel isSelected={cardSelections[card.id] > 0}>
                           {card.title}
                         </CardLabel>
@@ -781,10 +851,10 @@ export default function ConditionPage() {
                 맞춤 영양 조합을 시작하세요.
               </BottomText>
               <CTAButton 
-                disabled={false}
+                disabled={!hasSelectedCards}
                 onClick={handleCTAClick}
               >
-                {hasSelectedCards ? '선택한 상태로 조합 시작' : '기본 조합으로 시작'}
+                {hasSelectedCards ? '오늘의 영양 받기' : '몸상태를 알려주세요'}
               </CTAButton>
             </BottomSection>
           </Content>

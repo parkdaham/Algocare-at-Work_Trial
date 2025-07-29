@@ -14,7 +14,7 @@ export const globalStyles = css`
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, sans-serif;
     color: ${theme.colors.gray[800]};
     background-color: ${theme.colors.white};
