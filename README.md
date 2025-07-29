@@ -105,4 +105,4 @@ import { Card } from '@/components/Card';
 
 ## 📞 문의
 
-개발 관련 문의사항은 AlgoCare 개발팀에 연락해주세요. 
+개발 관련 문의사항은 AlgoCare 개발팀에 연락해주세요.
